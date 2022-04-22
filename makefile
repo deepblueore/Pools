@@ -4,4 +4,4 @@ test: test.o pool.o
 pool.o: pool.cpp
 	g++ -c pool.cpp -o pool.o
 clean:
-	rm -rf pool. *.o                     
+	rm -rf interface. *.o  
