@@ -1,13 +1,13 @@
 #include "pool.hpp"
 #include <random>
 
-#define POOL_COUNT 100
+#define POOL_COUNT 10000
 #define POOL_GEN_THREADS 4
 #define ADD_THREADS 4
 #define CONNECT_THREADS 4
 #define MEASURE_THREADS 4
-#define CONNECT_NUM 20
-#define ADDITION_COUNT 150
+#define CONNECT_NUM 450
+#define ADDITION_COUNT 12000
 #define R_MIN 1
 #define R_MAX 20
 
@@ -110,6 +110,15 @@ int main()
 	for(iPool* curPool : pools){printf("Pool %d: %Lf liters\n", curPool->getPos(), curPool->getMeasure());}
 
 	//добавление воды ADDITION_COUNT раз
-	
+	poolsToAdd.clear();
+	for(int iter = 0; iter < ADDITION_COUNT; ++iter)
+	{
+		poolsToAdd.emplace_back(std::make_pair(pools[intRand(0, POOL_COUNT - 1)], intRand(R_MIN+100, R_MAX+100)));
+	}
+        for(int iter = 0; iter < ADD_THREADS; ++iter){commands.emplace_back(std::thread(addToPools, &poolsToAdd));};
+        for(int iter = 0; iter < ADD_THREADS; ++iter){commands[iter].join();}
+        commands.clear();
+        printf("\nAfter all the additions:\n");
+        for(iPool* curPool : pools){printf("Pool %d: %Lf liters\n", curPool->getPos(), curPool->getMeasure());}
 }
 
