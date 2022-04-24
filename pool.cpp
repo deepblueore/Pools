@@ -1,4 +1,5 @@
 #include "pool.hpp"
+#include "defines.hpp"
 
 Graph::Graph()
 {
@@ -44,6 +45,7 @@ void Graph::_makePipe(const int& firstPos, const int& secondPos)
 
 	//перераспределение воды по компоненте связности бассейна
 	int* usedPools = new int[POOL_COUNT]; //посещенные бассейны
+	//std::memset(usedPools, 0, sizeof(int) * POOL_COUNT);
 	int adjacencyCount = 0; //размер компоненты связности
 	double sumMeasure = 0; //объем компоненты связности
 	double newMeasure; //распределенный объем
@@ -77,6 +79,7 @@ void Graph::_dfs(int poolPos, int* usedPools, int& adjacencyCount, double& adjac
 void Graph::_addWater(const int& poolPos, const double& waterMeasure)
 {
 	int* usedPools = new int[POOL_COUNT];
+	//std::memset(usedPools, 0, sizeof(int) * POOL_COUNT);
 	int adjacencyCount = 0;
 	double adjacencySum = 0;
 	double additionalMeasure;
