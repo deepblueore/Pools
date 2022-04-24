@@ -1,11 +1,5 @@
 #include "pool.hpp"
 
-#define POOL_COUNT 10 //число бассейнов
-#define PIPE_COUNT 3 //число труб
-#define ADD_COUNT 4 //число добавлений воды
-#define W_MIN 1 //минимальный объем, добавляемый за раз
-#define W_MAX 10 //максимальный объем, добавляемый за раз
-
 Graph::Graph()
 {
 	_pools = new pool[POOL_COUNT]; //инициализация массива бассейнов
