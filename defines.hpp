@@ -1,9 +1,5 @@
-#define POOL_COUNT 9000000 //число бассейнов
-#define POOL_GEN_THREADS 4 //потоки генерации бассейна
-#define ADD_THREADS 4 //потоки добавления воды
-#define CONNECT_THREADS 4 //потоки соединения
-#define MEASURE_THREADS 4 
-#define CONNECT_NUM 10 //число труб
-#define ADDITION_COUNT 150 //число добавлений воды
-#define R_MIN 1 //минимальный добавляемый объем
-#define R_MAX 20
+#define POOL_COUNT 9000 //число бассейнов
+#define PIPE_COUNT 14000 //число труб
+#define ADD_COUNT 35000 //число добавлений воды
+#define W_MIN 1 //минимальный объем, добавляемый за раз
+#define W_MAX 10 //максимальный объем, добавляемый за раз

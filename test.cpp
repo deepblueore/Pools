@@ -2,8 +2,9 @@
 
 int main()
 {
-	Interface test;
-	test.generate();
-	//test.connect();
-	//test.addWater();
+	Graph pools;
+	pools.makePipes();
+	pools.getMeasures();
+	pools.addWater();
+	pools.getMeasures();
 }
