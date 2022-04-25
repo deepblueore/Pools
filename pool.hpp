@@ -1,31 +1,33 @@
 #pragma once
 
+#include <cstring>
 #include <cstdio>
-#include <random>
 
-typedef struct
-{
-	double measure{0};
-}pool;
+#define PALLOC_SIZE 50
 
-
-class Graph
+class Pool
 {
 	private:
-		pool* _pools; //массив бассейнов
-		int** _adjacency; //матрица: 1, если есть труба; 0 - иначе
-
-		void _makePipe(const int& firstPos, const int& secondPos); //соединить бассейны трубой
-		void _addWater(const int& poolPos, const double& waterMeasure); //добавить воду в бассейн
-
-		void _dfs(int poolPos, int* usedPools, int& adjacencyCount, double& adjacencySum); //запуск dfs из бассейна
-		int _intRand(const int& min, const int& max) const; //генератор чисел
+		double _measure = 0; //объем воды
+		unsigned int _position; //позиция в массиве бассейнов (для быстрой работы списка смежности)
+		unsigned int* _ptrPipes{NULL}; //позиции бассейнов, с которыми есть труба
+		unsigned int _pipesSize = 0; //фактический размер _pipes[]
+		unsigned int _pipesCapacity = PALLOC_SIZE; //емкость pipes[]
 	public:
-		Graph();
-		~Graph();
+		Pool();
+		~Pool();
 
-		//функции нужны для реализации интерфейса
-		void makePipes();
-		void addWater();
-		void getMeasures();
+		//геттеры
+		double getMeas() const;
+		unsigned int getPos() const;
+		unsigned int* getPipes() const;
+		unsigned int getSize() const;
+
+		//сеттеры
+		void setMeas(const double& newMeasure);
+		void setPos(const unsigned int& newPosition);
+
+		//добавления
+		void pushPipe(const unsigned int& newPipe);
+		void addMeas(const double& newMeasure);
 };
